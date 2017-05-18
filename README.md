@@ -1,4 +1,4 @@
-# ZPushKit
+# ZPlayerKit
 
 [![Version](https://img.shields.io/cocoapods/v/ZPushKit.svg?style=flat)](http://cocoapods.org/pods/ZPushKit)
 [![License](https://img.shields.io/cocoapods/l/ZPushKit.svg?style=flat)](http://cocoapods.org/pods/ZPushKit)
