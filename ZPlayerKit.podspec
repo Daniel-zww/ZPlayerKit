@@ -1,13 +1,13 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ZPlayerKit'
-  s.version          = "1.0.2"
+  s.version          = "1.1.0"
   s.summary          = 'ZPlayerKit.'
   # s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.license          = 'MIT' 
   s.author           = { "Daniel" => "648118379@qq.com" }
   s.description      = <<-DESCRIPTION
-                      Ximalaya Version 3.1.7
+                      Ximalaya Version 4.9
                       DESCRIPTION
   s.homepage         = 'https://github.com/Daniel-zww/ZPlayerKit'
   s.source           = { :git => "https://github.com/Daniel-zww/ZPlayerKit.git", :tag => s.version.to_s }
