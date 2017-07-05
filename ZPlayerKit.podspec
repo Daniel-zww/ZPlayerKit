@@ -20,6 +20,7 @@ Pod::Spec.new do |s|
   s.source_files = 'ZPlayerKit/include/*.{h}'
   s.requires_arc = true
   s.dependency 'FMDB'
+  s.dependency 'MBProgressHUD'
 
 end
   
