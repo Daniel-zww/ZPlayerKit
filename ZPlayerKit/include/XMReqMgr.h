@@ -8,19 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "XMSDKInfo.h"
+#import "XMErrorModel.h"
 
-#pragma mark - XMErrorModel
-
-@interface XMErrorModel : NSObject
-/** 错误编号 */
-@property (nonatomic, assign) NSInteger error_no;
-/** 错误代码 */
-@property (nonatomic, strong) NSString *error_code;
-/** 错误信息描述 */
-@property (nonatomic, strong) NSString *error_desc;
-@end
-
-//------------------------------------------------------------------------------------
 
 typedef void (^XMRequestHandler)(id result,XMErrorModel *error);
 
@@ -30,11 +19,26 @@ typedef void (^XMRequestHandler)(id result,XMErrorModel *error);
 
 @protocol XMReqDelegate <NSObject>
 
+/* 初始化请求成功 */
 -(void)didXMInitReqOK:(BOOL)result;
+
+/* 初始化请求失败 */
 -(void)didXMInitReqFail:(XMErrorModel *)respModel;
 
 @optional
-- (void)didXMGetConfig:(BOOL)result;
+
+/* accessToken过期 */
+/* 若接入付费接口，必须实现此代理方法，并在此方法中刷新accessToken。此处的accessToken指的是XMLYAuthorize中登录成功后获取的授权登录token。 */
+- (void)didXMAuthAccessTokenExpired;
+
+/* 付费内容播放失败/下载失败/下单失败 */
+- (void)didXMOpenPayFailWithError:(XMErrorModel *)error;
+
+/* 付费内容支付成功 */
+- (void)didXMPurchaseSucceed;
+
+/* 付费内容支付失败 */
+- (void)didXMPurchaseFailWithError:(XMErrorModel *)error;
 
 @end
 
@@ -51,6 +55,7 @@ typedef void (^XMRequestHandler)(id result,XMErrorModel *error);
 
 @property (nonatomic,assign) BOOL usingSynPost;
 @property (nonatomic,retain) NSString *appkey;
+@property (nonatomic,retain) NSString *appSecret;
 
 //设为YES即仍旧使用HTTP请求api.ximalaya.com(默认使用HTTPS)
 @property (nonatomic,assign) BOOL usingHttpWhenRequestApiDomain;
@@ -61,47 +66,57 @@ typedef void (^XMRequestHandler)(id result,XMErrorModel *error);
 
 @property (nonatomic,assign) id<XMReqDelegate> delegate;
 
-///**
-// *  注册使用http 代理
-// *
-// *  @param host 必填，
-
-// *  @param port 必填
-// */
-- (void)useHttpProxy:(NSString*)host port:(NSInteger)port usrname:(NSString*)usrname passwd:(NSString*)passwd effectUrls:(NSArray*)urlStringArray;
-
-///**
-// *  取消http代理
-// *
-// */
-- (void)cancelHttpProxy;
-
-///**
-// *  生成或更新动态口令（如没有则生成、有则更新）
-// *
-// *  @param appKey 必填，开放平台应用唯一Key
-
-// *  @param appSecret     必填，APP的私钥，用于生产sig签名
-// */
+/**
+ *  生成或更新动态口令（如没有则生成、有则更新）
+ *
+ *  @param appKey 必填，开放平台应用唯一Key
+ *
+ *  @param appSecret     必填，APP的私钥，用于生产sig签名
+ */
 - (void)registerXMReqInfoWithKey:(NSString *)appKey appSecret:(NSString *)appSecret;
 
-///**
-// *  请求喜马拉雅的内容
-// *
-// *  @param reqType 必填，请求类型
-
-// *  @param params  必填，请求参数字典
-// *
-// *  @param reqHandler 必填，请求完成后的回调block
-// */
+/**
+ *  请求喜马拉雅的内容
+ *
+ *  @param reqType 必填，请求类型
+ *
+ *  @param params  必填，请求参数字典
+ *
+ *  @param reqHandler 必填，请求完成后的回调block
+ */
 - (void)requestXMData:(XMReqType)reqType params:(NSDictionary*)params withCompletionHander:(XMRequestHandler)reqHandler;
 
 - (void)postDataToXMSvr:(NSInteger)reqType params:(NSDictionary*)params withCompletionHander:(XMRequestHandler)reqHandler;
 
-///**
-// *  请在 AppDelegate的 - (void)applicationWillTerminate:(UIApplication *)application 中调用
-// *
-// */
+/**
+ *  请在 AppDelegate的 - (void)applicationWillTerminate:(UIApplication *)application 中调用
+ *
+ */
 - (void)closeXMReqMgr;
+
+
+
+//--------------------------------付费相关----------------------------------------------------
+#pragma mark - 付费相关
+
+/**
+ *  请求付费相关接口
+ *
+ *  @param reqType 必填，请求类型
+ *  @param params  必填，请求参数字典
+ *  @param reqHandler 必填，请求完成后的回调block
+ *
+ *  @param accessToken 必填，此处的accessToken指的是XMLYAuthorize中登录成功后获取的授权登录token
+ */
+- (void)requestXMAuthData:(XMReqType)reqType withAuthToken:(NSString *)accessToken params:(NSDictionary*)params withCompletionHander:(XMRequestHandler)reqHandler;
+
+/**
+ *  下单接口
+ *
+ *  @param params  必填，请求参数字典
+ *  @param reqHandler 必填，请求完成后的回调block
+ *
+ */
+- (void)postOrderWithParams:(NSDictionary *)params withCompletionHander:(XMRequestHandler)reqHandler;
 
 @end

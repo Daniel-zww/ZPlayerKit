@@ -58,20 +58,19 @@ typedef NS_ENUM(NSInteger, XMCacheTrackStatus) {
 @property (nonatomic, strong) NSString * trackTags;
 @property (nonatomic, strong) NSString * trackTitle;
 
-//解决ipad2模拟器下模型的时间戳和原来字典的时间戳不一致的问题
 @property (nonatomic, assign) double updatedAt;
 @property (nonatomic, assign) double createdAt;
 
 //可否下载，YES-可下载，NO-不可下载
 @property (nonatomic, assign) BOOL canDownload;
 
-@property   (nonatomic, assign) BOOL  playing;
-@property   (nonatomic, assign) BOOL  pause;
+@property (nonatomic, assign) BOOL  playing;
+@property (nonatomic, assign) BOOL  pause;
 
 @property (nonatomic, strong) NSDate *startPlayTime;
 
-@property   (nonatomic, assign) NSInteger   listenedTime;
-@property   (nonatomic, assign) NSInteger   listenedPosition;
+@property (nonatomic, assign) NSInteger   listenedTime;
+@property (nonatomic, assign) NSInteger   listenedPosition;
 
 
 @property (nonatomic, assign) XMCacheTrackStatus status;
@@ -85,5 +84,46 @@ typedef NS_ENUM(NSInteger, XMCacheTrackStatus) {
 -(NSDictionary *)toDictionary;
 
 - (void)copyPropertiesFrom:(XMTrack *)sound;
+
+//--------------------------------付费相关----------------------------------------------------
+/**
+ *   是否付费，固定值true
+ */
+@property (nonatomic, assign) BOOL isPaid;
+
+/**
+ *   声音是否整条免费听
+ */
+@property (nonatomic, assign) BOOL isFree;
+
+/**
+ *   是否加V。如果这条声音是转采的，则announcer是上传原始专辑的主播
+ */
+@property (nonatomic, assign) BOOL isVerified;
+
+/**
+ *   是否片花，片花声音一定是整条免费听声音
+ */
+@property (nonatomic, assign) BOOL isTrailer;
+
+/**
+ *   是否支持试听
+ */
+@property (nonatomic, assign) BOOL hasSample;
+
+/**
+ *   是否已购买
+ */
+@property (nonatomic, assign) BOOL isBought;
+
+/**
+ *   试听时长，如果不支持试听则这个试听时长为0
+ */
+@property (nonatomic, assign) NSInteger sampleDuration;
+
+/**
+ *   判断是否为付费音频
+ */
+- (BOOL)isPayTrack;
 
 @end

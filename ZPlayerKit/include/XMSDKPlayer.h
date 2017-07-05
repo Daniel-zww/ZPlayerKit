@@ -72,6 +72,10 @@ typedef NS_ENUM(NSInteger, XMSDKLivePlayerState) {
 //播放数据请求失败时调用，data.description是错误信息
 - (void)XMTrackPlayerDidErrorWithType:(NSString *)type withData:(NSDictionary*)data;
 //- (void)XMTrackPlayerDidErrorWithType:(NSInteger)type withData:(NSDictionary*)data;
+
+//没有网络情况下播放器因缓冲已播完而停止播放时触发
+- (void)XMTrackPlayerDidPausePlayForBadNetwork;
+
 @end
 
 //------------------------------------------------------------------------------------
@@ -151,10 +155,6 @@ typedef NS_ENUM(NSInteger, XMSDKLivePlayerState) {
  *  获得播放器缓存的大小，第三方可以自己统计缓存大小
  */
 - (unsigned long long)getTotalCacheSize;
-/**
- * 设置允许后台恢复播放(用于退到后台时手动调用pause并播放另一段音频，之后手动恢复播放)
- */
-- (void)settingEnableBackgroundResumePlay;
 /**
  *  重置播放速率，即恢复正常速率playRate=1.0
  */

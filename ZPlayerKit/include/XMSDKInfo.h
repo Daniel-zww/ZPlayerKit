@@ -162,9 +162,62 @@ typedef NS_ENUM(NSInteger, XMReqType){
     XMReqType_CustomizedSearchTracks,
     //获取自定义声音详情
     XMReqType_CustomizedTrackDetail,
+    //搜索所有专辑或声音听单
+    XMReqType_CustomizedSearchAlbumsOrTrackColumns,
     
 //配置接口
     XMReqType_appConfig,
+    
+//付费接口
+    /** 获取所有付费专辑 */
+    XMReqType_AllPaidAlbums,
+    /** 获取付费精品分类下的标签列表 */
+    XMReqType_Tags,
+    /** 获取热门付费专辑列表 */
+    XMReqType_PaidAlbumsByTag,
+    /** 分页获取付费专辑下的声音列表 */
+    XMReqType_BrowsePaidAlbumTracks,
+    /** 批量根据付费专辑ID获取付费专辑详情 */
+    XMReqType_BatchGetPaidAlbums,
+    /** 根据声音ID获取付费声音详情 */
+    XMReqType_BatchGetPaidTracks,
+    /** 获取所有付费内容排行榜基础信息 */
+    XMReqType_PaidContentRanks,
+    /** 根据rank_key分页获取某个付费专辑排行榜下的付费专辑列表 */
+    XMReqType_RankAlbums,
+    /** 获取用户购买过的所有付费专辑 */
+    XMReqType_GetBoughtAlbums,
+    /** 根据用户ID和一批付费专辑ID获取用户对这批付费专辑的购买状态  */
+    XMReqType_AlbumBoughtStatus,
+    /** 根据用户ID和一批付费声音ID获取用户对这批付费声音的购买状态  */
+    XMReqType_TrackBoughtStatus,
+    /** 根据关键词搜索付费专辑 */
+    XMReqType_SearchPaidAlbums,
+    /** 根据关键词搜索付费声音 */
+    XMReqType_SearchPaidTracks,
+    /** 实时获取专辑的价格信息 */
+    XMReqType_GetPriceInfo,
+    /** 根据订单号获取支付url */
+    XMReqType_GetPayUrl,
+    
+//用户播放历史接口
+    /** 根据用户ID获取用户播放云历史记录 */
+    XMReqType_PlayHistoryGetByUid,
+    /** 用户上传播放云历史记录 */
+    XMReqType_PlayHistoryUpload,
+    /** 用户批量上传播放云历史记录 */
+    XMReqType_PlayHistoryBatchUpload,
+    /** 用户批量删除播放云历史记录 */
+    XMReqType_PlayHistoryBatchDelete,
+    
+//用户订阅接口
+    /** 获取喜马拉雅用户的动态更新的订阅专辑列表 */
+    XMReqType_SubscribeGetAlbumsByUid,
+    /** 用户新增或取消已订阅专辑 */
+    XMReqType_SubscribeAddOrDelete,
+    /** 用户批量新增已订阅专辑 */
+    XMReqType_SubscribeBatchAdd,
+
 };
 
 #endif

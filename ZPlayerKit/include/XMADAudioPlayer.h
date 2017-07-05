@@ -58,7 +58,7 @@ DECLARE_SINGLETON_METHOD(XMADAudioPlayer,sharedPlayer);
 
 - (void)playAdSound:(XMADAudioItem*)adItem;
 
-//- (void)pause;
+- (void)pause;
 
 - (BOOL)isRunningSoundLogo;
 
