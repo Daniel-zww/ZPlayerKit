@@ -4,4 +4,4 @@
 [![License](https://img.shields.io/cocoapods/l/ZPlayerKit.svg?style=flat)](http://cocoapods.org/pods/ZPlayerKit)
 [![Platform](https://img.shields.io/cocoapods/p/ZPlayerKit.svg?style=flat)](http://cocoapods.org/pods/ZPlayerKit)
 
-### 喜马拉雅SDK 3.1.7
+### 喜马拉雅SDK 4.9
