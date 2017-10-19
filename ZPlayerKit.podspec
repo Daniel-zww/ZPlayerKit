@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ZPlayerKit'
-  s.version          = "1.1.1"
+  s.version          = "1.1.2"
   s.summary          = 'ZPlayerKit.'
   # s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.license          = 'MIT' 
